@@ -1,9 +1,9 @@
-import { Center } from 'native-base';
 import React, { Component } from 'react';
-import { useState } from "react";
 import { Button, Keyboard, Platform, StyleSheet, Text, TextInput, View, CheckBox, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TouchableOpacity } from 'react-native-web';
+import Checkbox from 'expo-checkbox';
+
 
 
 export default class AddOrganiser extends Component {
@@ -15,16 +15,17 @@ export default class AddOrganiser extends Component {
   addressRef = React.createRef();
   parishRef = React.createRef();
 
-
   constructor(props) {
     super(props);
     this.state = {
-        organiserName: '',
-        organiserEmail: '',
-        organiserPhone: '',
-        organiserCountry: '',
-        organiserAddress: '',
-        organiserParish: '',
+      organiserName: '',
+      organiserEmail: '',
+      organiserPhone: '',
+      organiserCountry: '',
+      organiserAddress: '',
+      organiserParish: '',
+      termsSelected: false,
+      policySelected: false,
     };
     this.submitPressed = this.submitPressed.bind(this);
   }
@@ -47,7 +48,6 @@ export default class AddOrganiser extends Component {
     if (activeIndex === -1) {
         return;
     }
-
     const nextIndex = activeIndex + 1;
     if (nextIndex < this.inputs().length && this.inputs()[nextIndex].current != null) {
         this.setFocus(this.inputs()[nextIndex], true);
@@ -59,7 +59,6 @@ export default class AddOrganiser extends Component {
   handleNameChange = (organiserName) => {
     this.setState({organiserName});  
   }
-
   handleEmailChange = (organiserEmail) => {
     this.setState({organiserEmail});  
   }
@@ -72,10 +71,15 @@ export default class AddOrganiser extends Component {
   handleAddressChange = (organiserAddress) => {
     this.setState({organiserAddress});  
   } 
-  
   handleParishChange = (organiserParish) => {
     this.setState({organiserParish});  
   }
+  setTermsSelection =  () => {
+    this.state.termsSelected ? this.setState({termsSelected: false}) : this.setState({termsSelected: true}) 
+  };
+  setPolicySelection =  () => {
+    this.state.policySelected ? this.setState({policySelected: false}) : this.setState({policySelected: true}) 
+ };
 
   getActiveInputIndex = () => {
     const activeIndex = this.inputs().findIndex((input) => {
@@ -112,8 +116,9 @@ export default class AddOrganiser extends Component {
         const response = await fetch(`http://localhost:3000/events`, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
           },
+          mode: 'cors',
           body: JSON.stringify(eventData)
         });
         if(response.ok){
@@ -129,24 +134,17 @@ export default class AddOrganiser extends Component {
    submitPressed = async() => {
     const eventParams = this.props.route.params;
     Keyboard.dismiss();
-
     let eventForms = {
       ...eventParams,
       ...this.state
     }
-
-    console.log("Event forms: ", JSON.stringify(eventForms))
-
     const res = await this.Register(eventForms);
     if(res){
       this.props.navigation.navigate('Confirmation', this.state);
     }
-
-
   }
 
   render() {
-
     return (
         <View style={{ backgroundColor: '#03A9F5', alignItems: "center", marginTop:0}}>
             <View style={{  flexDirection: 'column', alignItems: 'center', justifyContent:'center' }}>
@@ -156,7 +154,6 @@ export default class AddOrganiser extends Component {
                     style={{
                     width: 94,
                     height: 84,
-                    //marginRight: 10,
                     marginBottom: 2
                 }}
                 />
@@ -169,8 +166,7 @@ export default class AddOrganiser extends Component {
             <Text onPress={()=>{this.props.navigation.navigate('AddEvent')}}  style={{fontSize:15,opacity:1,color:'#B1B1B1',fontFamily:'Helvetica Neue',textAlign:'left',marginRight:41,marginLeft:26}}>Event Details</Text>
             </TouchableOpacity>           
             <TouchableOpacity>            
-            <Text style={{fontWeight:'bold',fontSize:15,fontFamily:'Helvetica Neue',color:'#505050',textAlign: 'left', textDecorationLine: 'underline', textDecorationColor: '#FFEC0D'
-}}>Organiser's Details</Text>
+            <Text style={{fontWeight:'bold',fontSize:15,fontFamily:'Helvetica Neue',color:'#505050',textAlign: 'left', textDecorationLine: 'underline', textDecorationColor: '#FFEC0D'}}>Organiser's Details</Text>
             </TouchableOpacity>
         </View>
         <KeyboardAwareScrollView
@@ -257,17 +253,17 @@ export default class AddOrganiser extends Component {
                       />
                 </View>
                 <View style={styles.checkboxContainer}>
-                     <CheckBox
-                         //value={isSelected}
-                          //onValueChange={setSelection}
+                     <Checkbox
+                          value={this.state.termsSelected}
+                          onValueChange={this.setTermsSelection}
                           style={styles.checkbox}
                      />
                      <Text style={styles.label}>Terms of Use</Text>
                 </View>
                 <View style={styles.checkboxContainer}>
-                    <CheckBox
-                        //value={isSelected}
-                        //onValueChange={setSelection}
+                    <Checkbox
+                        value={this.state.policySelected}
+                        onValueChange={this.setPolicySelection}
                         style={styles.checkbox}
                     />
                 <Text style={styles.label}>Privacy Policy</Text>

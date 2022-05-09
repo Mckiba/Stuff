@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Keyboard, Platform, StyleSheet, Text, TextInput, View, CheckBox, Image } from 'react-native';
+import { Button, Keyboard, Platform, StyleSheet, Text, TextInput, View, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TouchableOpacity } from 'react-native-web';
 import * as ImagePicker from 'expo-image-picker';
+import Checkbox from 'expo-checkbox';
+
 
 
 export default class AddEvent extends Component {
@@ -31,6 +33,8 @@ export default class AddEvent extends Component {
         eventLocation: '',
         checkoutLink: '',
         image: null,
+        termsSelected: false,
+        policySelected: false,
     };
     this.submitPressed = this.submitPressed.bind(this);
   }
@@ -125,6 +129,14 @@ export default class AddEvent extends Component {
   deleteImage =  () => {
       this.setState({ image: null })   
   };
+
+  setTermsSelection =  () => {
+    this.state.termsSelected ? this.setState({termsSelected: false}) : this.setState({termsSelected: true}) 
+  };
+
+  setPolicySelection =  () => {
+    this.state.policySelected ? this.setState({policySelected: false}) : this.setState({policySelected: true}) 
+ };
 
 
   finishEditing = () => {
@@ -347,15 +359,17 @@ export default class AddEvent extends Component {
                         </View>}
                 </View>
                 <View style={styles.checkboxContainer}>
-                     <CheckBox
+                     <Checkbox
+                          value={this.state.termsSelected}
+                          onValueChange={this.setTermsSelection}
                           style={styles.checkbox}
                      />
                      <Text style={styles.label}>Terms of Use</Text>
                 </View>
                 <View style={styles.checkboxContainer}>
-                    <CheckBox
-                        //value={isSelected}
-                        //onValueChange={setSelection}
+                    <Checkbox
+                        value={this.state.policySelected}
+                        onValueChange={this.setPolicySelection}
                         style={styles.checkbox}
                     />
                 <Text style={styles.label}>Privacy Policy</Text>

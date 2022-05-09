@@ -3,20 +3,16 @@ import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { EventsList } from './screens/EventsList.js';
-import { ProductDetails } from './screens/EventDetails.js';
 import ActionBarImage from './components/ActionBarImage.js';
 import EventForms from './screens/EventForms.js'
 import OrganiserForms from './screens/OrganiserForms.js'
 import Confirmation from './screens/Confirmation.js';
 import * as Linking from 'expo-linking';
 
-
 const Stack = createNativeStackNavigator();
-
 const prefix = Linking.createURL('/');
 
 function App() {
-
   const linking = {
     prefixes: [prefix],
   };
@@ -26,7 +22,8 @@ function App() {
         <Stack.Navigator>
         <Stack.Screen name='Events' component={EventsList} 
             options={({ navigation }) => ({
-              title: '',
+              style: { shadowColor: 'transparent',backgroundColor: '#fff', elevation:0,    borderBottomWidth: 0,
+            },
               headerTitleStyle: styles.headerTitle,
               headerTitle: () => <ActionBarImage />,
           })}/>
@@ -52,11 +49,6 @@ function App() {
                 backgroundColor:'#FFFFFF'
               }}
           )}/>
-          <Stack.Screen name='ProductDetails' component={ProductDetails} 
-            options={({ navigation }) => ({
-              title: 'Product details',
-              headerTitleStyle: styles.headerTitle,
-          })} />
         </Stack.Navigator>
       </NavigationContainer>
   );
@@ -64,7 +56,12 @@ function App() {
 const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 20,
-    height: 200
+    height: 200,
+    shadowColor: 'transparent',
+    shadowRadius: 0,
+    shadowOffset: {
+    height: 0,
+},
   }
 });
 

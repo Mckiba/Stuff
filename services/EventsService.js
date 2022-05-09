@@ -1,4 +1,4 @@
-const PRODUCTS = [
+const EVENTS = [
     {
         id: 100,
         name: 'Read Fullrev Fridays',
@@ -31,11 +31,11 @@ const PRODUCTS = [
     }
 ];
 
-export function getProducts() {
-    return PRODUCTS;
+export function getEvents() {
+    return EVENTS;
 }
 
 export function getProduct(id) {
-    return PRODUCTS.find((product) => (product.id == id));
+    return EVENTS.find((event) => (event.id == id));
 }
 
