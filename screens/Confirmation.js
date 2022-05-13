@@ -7,13 +7,9 @@ export default class Confirmation extends Component {
         <View style={styles.Container}>
           <Image
           source={require('../assets/Clap-Hand@2x.png')}
-          style={{
-              width: 33,
-             height:29,
-             marginBottom: 17,
-            }}
+          style={{width: 33, height:29, marginBottom: 17,}}
           />
-          <Text style={styles.Text}>Hello #firstname</Text>
+          <Text style={styles.Text}></Text>
           <View style={{width: '68%'}}>
             <Text style={styles.message}>Thank you for sharing your events here. We will review the details of your event and should be made published within 48 hours.</Text>
           </View>
