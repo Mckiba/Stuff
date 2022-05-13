@@ -27,7 +27,7 @@ export function EventsList ({navigation}) {
   };
   
   const fetchData = async () => {
-    const resp = await fetch("http://5b83-2605-a200-9502-fa57-444c-c01e-774c-6560.ngrok.io/events?status=Approved", requestOptions);
+    const resp = await fetch("https://5b83-2605-a200-9502-fa57-444c-c01e-774c-6560.ngrok.io/events?status=Approved", requestOptions);
     const data = await resp.json();
     setProducts(data);
     setFilteredDataSource(data);
