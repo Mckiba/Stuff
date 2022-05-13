@@ -1,0 +1,30 @@
+{
+  "files": {
+    "app.js": "/static/js/app.2371af03.chunk.js",
+    "app.js.map": "/static/js/app.2371af03.chunk.js.map",
+    "runtime~app.js": "/static/js/runtime~app.2e9f1821.js",
+    "runtime~app.js.map": "/static/js/runtime~app.2e9f1821.js.map",
+    "static/js/2.54637752.chunk.js": "/static/js/2.54637752.chunk.js",
+    "static/js/2.54637752.chunk.js.map": "/static/js/2.54637752.chunk.js.map",
+    "favicon-16.png": "/favicon-16.png",
+    "favicon-32.png": "/favicon-32.png",
+    "favicon.ico": "/favicon.ico",
+    "index.html": "/index.html",
+    "manifest.json": "/manifest.json",
+    "serve.json": "/serve.json",
+    "static/js/2.54637752.chunk.js.LICENSE.txt": "/static/js/2.54637752.chunk.js.LICENSE.txt",
+    "static/media/AdSpace.png": "/static/media/AdSpace.fe3b868a.png",
+    "static/media/Clap-Hand@2x.png": "/static/media/Clap-Hand@2x.80b51984.png",
+    "static/media/date.png": "/static/media/date.7d309ce7.png",
+    "static/media/header.png": "/static/media/header.486dee98.png",
+    "static/media/location.png": "/static/media/location.fd60031f.png",
+    "static/media/logo.png": "/static/media/logo.daa8f407.png",
+    "static/media/time.png": "/static/media/time.4e760071.png",
+    "static/media/upload.png": "/static/media/upload.27d5b833.png"
+  },
+  "entrypoints": [
+    "static/js/runtime~app.2e9f1821.js",
+    "static/js/2.54637752.chunk.js",
+    "static/js/app.2371af03.chunk.js"
+  ]
+}
