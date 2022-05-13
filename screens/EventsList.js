@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import { View, Text, FlatList, StyleSheet, TextInput, Image } from 'react-native';
 
 import { Event } from '../components/Events.js';
-import { getEvents } from '../services/EventsService.js';
 
 export function EventsList ({navigation}) {
 
@@ -18,11 +17,6 @@ export function EventsList ({navigation}) {
 
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   
-  //for  offline use
-  /*useEffect(() => {
-    setProducts(getEvents());
-  });*/ 
-
   useEffect(() => {
     fetchData();
   }, []);  
