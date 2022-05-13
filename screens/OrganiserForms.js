@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Keyboard, Platform, StyleSheet, Text, TextInput, View, CheckBox, Image } from 'react-native';
+import {Alert, Button, Keyboard, Platform, StyleSheet, Text, TextInput, View, CheckBox, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { TouchableOpacity } from 'react-native-web';
 import Checkbox from 'expo-checkbox';
@@ -24,6 +24,8 @@ export default class AddOrganiser extends Component {
       organiserCountry: '',
       organiserAddress: '',
       organiserParish: '',
+      dateUploaded: new Date().toLocaleString(),
+      dateReviewed: null,
       termsSelected: false,
       policySelected: false,
     };
@@ -132,16 +134,20 @@ export default class AddOrganiser extends Component {
   }
 
    submitPressed = async() => {
-    const eventParams = this.props.route.params;
-    Keyboard.dismiss();
-    let eventForms = {
-      ...eventParams,
-      ...this.state
-    }
-    const res = await this.Register(eventForms);
-    if(res){
-      this.props.navigation.navigate('Confirmation', this.state);
-    }
+     if(this.state.organiserAddress == '' || this.state.organiserName == '' , this.state.organiserPhone == '' ){
+      alert("Enter All Required Feilds")
+     }else {
+        const eventParams = this.props.route.params;
+        Keyboard.dismiss();
+        let eventForms = {
+          ...eventParams,
+          ...this.state
+        }
+        const res = await this.Register(eventForms);
+        if(res){
+          this.props.navigation.navigate('Confirmation', this.state);
+        }
+     }
   }
 
   render() {

@@ -1,16 +1,16 @@
 import React from 'react';
 import {Text, Image, View, StyleSheet, TouchableOpacity, Linking, Platform} from 'react-native';
 
-export function Product({eventName, eventPrice, image, eventDetails,eventDate, eventTime, eventLocation, onPress, checkoutLink, organiserPhone}) {
+export function Event({eventName, image, eventDetails,eventDate, eventTime, eventLocation, onPress, checkoutLink, organiserPhone}) {
 
-  const url = `sms:${organiserPhone}${Platform.OS === "ios" ? "&" : "?"}body=${""}`
-
+  //const url = `sms:${organiserPhone}${Platform.OS === "ios" ? "&" : "?"}body=${""}`
+  const url =  `bip://NewP2PMessage?msisdn=${organiserPhone}&text=Hallo,+ik+heb+een+vraag`
   return (
     <View>
       <TouchableOpacity style={styles.card} onPress={onPress}>
         <Image
           style={styles.thumb}
-          source={image}  //revert after demo
+          source={image}  
         />
         <View style={styles.infoContainer}>
           <Text style={styles.name}>{eventName}</Text>
@@ -36,8 +36,8 @@ export function Product({eventName, eventPrice, image, eventDetails,eventDate, e
             <Text style={styles.buttonText}>Message Organiser</Text>
           </TouchableOpacity>
 
+        { checkoutLink !== '' ? 
           <View style={styles.row}>
-
             <TouchableOpacity  onPress={ ()=>{ Linking.openURL(`${checkoutLink}`)}} style={styles.message2}>
               <Image style={{ width:25, height:20,marginRight:10.59}} source={require('../assets/shop.png')}/>
               <Text style={styles.buttonText}>Buy Ticket</Text>
@@ -47,9 +47,13 @@ export function Product({eventName, eventPrice, image, eventDetails,eventDate, e
               <Image style={{ width:20, height:21,marginRight:11.42}} source={require('../assets/share.png')}/>
               <Text style={styles.buttonText}>Tell a friend</Text>
             </TouchableOpacity>
-
           </View>
-
+            :
+            <TouchableOpacity style={styles.message}>
+              <Image style={{ width:25, height:26,marginRight:12}} source={require('../assets/share.png')}/>
+              <Text style={styles.buttonText}>Tell a friend</Text>
+            </TouchableOpacity>
+        }
         </View>
       </TouchableOpacity>
     </View>
@@ -82,7 +86,7 @@ const styles = StyleSheet.create({
       marginTop:8
   },
   thumb: {
-    height: 260,
+    height: 376,
     width: '100%',
   },
   infoContainer: {
@@ -118,7 +122,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#03a9f5",
     justifyContent:'center',
-    marginTop: 24,
+    marginTop: 20,
     fontSize: 15,
     height: 39
 

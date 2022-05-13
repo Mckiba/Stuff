@@ -1,19 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import { View, Text, FlatList, StyleSheet, TextInput, Image } from 'react-native';
 
-import { Product } from '../components/Events.js';
+import { Event } from '../components/Events.js';
 import { getEvents } from '../services/EventsService.js';
 
 export function EventsList ({navigation}) {
 
   function renderEvent({item: event}) {
     return (
-      <Product {...event} 
+      <Event {...event} 
       />
     );
   }
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
+  const [category, setCategory] = useState('');
+
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   
   //for  offline use
@@ -31,14 +33,13 @@ export function EventsList ({navigation}) {
   };
   
   const fetchData = async () => {
-    const resp = await fetch("http://localhost:3000/events", requestOptions);
+    const resp = await fetch("http://localhost:3000/events?status=Approved", requestOptions);
     const data = await resp.json();
     setProducts(data);
     setFilteredDataSource(data);
   }
 
-
-  const searchFilterFunction = (text) => {
+  const searchFilterFunction = (text, type) => {
     if (text) {
       const newData = products.filter(
         function (item) {
@@ -69,22 +70,15 @@ export function EventsList ({navigation}) {
           <Image style={{width:19,height:19}} source={require('../assets/search.png')} />
         </View>
        <View
-          style={styles.adSpace}>
-          <Text
-            style={{
-              textAlign: 'center',
-              color: 'grey',
-              fontWeight: 'bold'
-            }}>
-            AdSpace
-          </Text>
+          style={styles.adContainer}>
+          <Image style={styles.adSpace} source={require('../assets/AdSpace.png')} />
         </View>
     <View style={styles.container}>
-    <Text style={{fontSize: 18, fontWeight: 'bold',padding:8}}>Events in #Jamaica</Text> 
+    <Text style={{fontSize: 18, fontWeight: 'bold',padding:8,marginTop: 20}}>Events in #Jamaica</Text> 
     <FlatList
       style={styles.productsList}
       contentContainerStyle={styles.productsListContainer}
-      keyExtractor={(item) => item._id.toString()} 
+      keyExtractor={(item) => item.id.toString()} 
       data={filteredDataSource}
       renderItem={renderEvent}
     />
@@ -120,13 +114,15 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   adSpace: {
-    flexDirection: 'row',
-    backgroundColor: '#eeeeee',
-    height: 87,
+    height: 90,
     width: '90%',
     alignItems: 'center',
+  },
+  adContainer: {
+    flexDirection: 'row',
+    height: 87,
+    width: '100%',
     justifyContent: "center",
-    alignItems: "center",
     marginBottom: 18
   },
   itemStyle: {
