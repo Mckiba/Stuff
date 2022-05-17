@@ -315,19 +315,19 @@ const styles = StyleSheet.create({
     },
     text:{
         fontFamily: 'Helvetica Neue',
-        fontSize: 12,
         color:'#717171',
+        fontSize: 12,
         opacity: 1
     },
     textInput: {
-        height: 40,
         borderColor: "#D1D1D1",
+        fontFamily: 'Helvetica Neue',
+        color:'#717171',
+        fontSize: 12,
+        opacity: 1,
         borderBottomWidth: 1,
         paddingRight: 30,
-        fontFamily: 'Helvetica Neue',
-        fontSize: 12,
-        color:'#717171',
-        opacity: 1
+        height: 40,
     },
     errorText: {
       color: 'red',
@@ -349,10 +349,10 @@ const styles = StyleSheet.create({
         color:'#A79E9E',
       },
       label: {
-        margin: 8,
         fontFamily: 'Helvetica Neue',
-        fontSize: 12,
         color:'#717171',
-        opacity: 1
+        opacity: 1,
+        fontSize: 12,
+        margin: 8,
       },
   });

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { View, Text, FlatList, StyleSheet, TextInput, Image } from 'react-native';
-
+import * as RNLocalize from "react-native-localize";
 import { Event } from '../components/Events.js';
 
 export function EventsList ({navigation}) {
@@ -8,12 +8,11 @@ export function EventsList ({navigation}) {
   function renderEvent({item: event}) {
     return (
       <Event {...event} 
-      />
+      /> 
     );
   }
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
-  const [category, setCategory] = useState('');
 
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   
@@ -27,7 +26,8 @@ export function EventsList ({navigation}) {
   };
   
   const fetchData = async () => {
-    const resp = await fetch("https://bip-locale-demo-api.herokuapp.com/events?status=Approved", requestOptions);
+    const resp = await fetch("http://localhost:3000/events?status=Approved", requestOptions); //remove country when doing demo
+    //const resp = await fetch(`http://localhost:3000/events?status=Approved&country=${RNLocalize.getCountry()}`, requestOptions); //remove country when doing demo
     const data = await resp.json();
     setProducts(data);
     setFilteredDataSource(data);
@@ -68,7 +68,7 @@ export function EventsList ({navigation}) {
           <Image style={styles.adSpace} source={require('../assets/AdSpace.png')} />
         </View>
     <View style={styles.container}>
-    <Text style={{fontSize: 18, fontWeight: 'bold',padding:8,marginTop: 20}}>Events in #Jamaica</Text> 
+    <Text style={{fontSize: 18, fontWeight: 'bold',padding:8,marginTop: 20}}>Events in #{`${RNLocalize.getCountry()}`}</Text> 
     <FlatList
       style={styles.productsList}
       contentContainerStyle={styles.productsListContainer}
