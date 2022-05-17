@@ -26,7 +26,7 @@ export function EventsList ({navigation}) {
   };
   
   const fetchData = async () => {
-    const resp = await fetch("http://localhost:3000/events?status=Approved", requestOptions); //remove country when doing demo
+    const resp = await fetch("https://bip-locale-demo-api.herokuapp.com/events?status=Approved", requestOptions); //remove country when doing demo
     //const resp = await fetch(`http://localhost:3000/events?status=Approved&country=${RNLocalize.getCountry()}`, requestOptions); //remove country when doing demo
     const data = await resp.json();
     setProducts(data);
